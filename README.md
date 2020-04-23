@@ -1,1 +1,1 @@
-# hello-laravel
+# ec-example
