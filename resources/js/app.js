@@ -12,6 +12,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+import VueSwal from 'vue-swal'
+Vue.use(VueSwal)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -33,4 +36,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    methods: {
+        deleteConfirm: function(name, event) {
+            this.$swal({
+                title: name + "の削除",
+                text: "この操作は取り消せません。本当によろしいですか？",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    event.target.form.submit()
+                }
+            });
+        }
+    }
 });
