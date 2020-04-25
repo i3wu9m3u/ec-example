@@ -30,7 +30,7 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td>{{ $product->name }}</td>
-            <td>{{ $product->description }}</td>
+            <td>{{ Str::limit($product->description, 40, '...') }}</td>
             <td>{{ $product->price }}</td>
             <td>
                 <form action="{{ route('admin.products.destroy',$product->id) }}" method="POST">

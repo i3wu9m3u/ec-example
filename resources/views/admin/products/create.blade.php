@@ -23,26 +23,32 @@
     </div>
 @endif
 
-<form action="{{ route('admin.products.store') }}" method="POST">
+<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}">
+                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ old('description') }}</textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Description" required>{{ old('description') }}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Price:</strong>
-                <input type="number" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}">
+                <input type="number" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}" required>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Image:</strong>
+                <input type="file" name="image" class="form-control" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

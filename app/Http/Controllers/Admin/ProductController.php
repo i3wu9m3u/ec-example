@@ -54,9 +54,17 @@ class ProductController extends Controller
             'name'          => ['required', 'string', 'max:255'],
             'description'   => ['required', 'string', 'max:65535'],
             'price'         => ['required', 'integer', 'min:0'],
+            'image'         => ['required', 'image', 'mimes:jpeg,png,bmp'],
         ]);
 
-        Product::create($request->all());
+        // DB登録
+        $product = new Product;
+        $product->fill($request->all());
+        $product->image_extension = $request->file('image')->getClientOriginalExtension();
+        $product->save();
+
+        // ファイル保存
+        $product->storeImage($request->file('image'));
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product created successfully.');
@@ -96,7 +104,7 @@ class ProductController extends Controller
         $request->validate([
             'name'          => ['required', 'string', 'max:255'],
             'description'   => ['required', 'string', 'max:65535'],
-            'price'         => ['required', 'integer', 'min:1'],
+            'price'         => ['required', 'integer', 'min:0'],
         ]);
 
         $product->update($request->all());
