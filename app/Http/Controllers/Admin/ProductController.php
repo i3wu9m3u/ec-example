@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(self::ITEM_PER_PAGE);
+        $products = Product::orderBy('id', 'desc')->paginate(self::ITEM_PER_PAGE);
 
         return view('admin.products.index', compact('products'));
     }
@@ -53,7 +53,7 @@ class ProductController extends Controller
         $request->validate([
             'name'          => ['required', 'string', 'max:255'],
             'description'   => ['required', 'string', 'max:65535'],
-            'price'         => ['required', 'integer', 'min:1'],
+            'price'         => ['required', 'integer', 'min:0'],
         ]);
 
         Product::create($request->all());
