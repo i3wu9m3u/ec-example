@@ -31,5 +31,11 @@
                 {{ $product->price }}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>CreatedAt:</strong>
+                {{ $product->created_at }}
+            </div>
+        </div>
     </div>
 @endsection
