@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         ];
         if (!app()->isProduction()) {
             $call_classes[] = UsersTableSeeder::class;
+            $call_classes[] = ProductsTableSeeder::class;
         }
         $this->call($call_classes);
     }
