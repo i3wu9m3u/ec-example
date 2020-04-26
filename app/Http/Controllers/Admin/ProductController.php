@@ -56,17 +56,18 @@ class ProductController extends Controller
             'price'         => ['required', 'integer', 'min:0'],
             'image'         => ['required', 'image', 'mimes:jpeg,png,bmp'],
         ]);
+        $file = $request->file('image');
 
         // DB登録
         $product = new Product;
         $product->fill($request->all());
-        $product->image_extension = $request->file('image')->getClientOriginalExtension();
+        $product->image_extension = $file->getClientOriginalExtension();
         $product->save();
 
         // ファイル保存
-        $product->storeImage($request->file('image'));
+        $product->storeImage($file);
 
-        return redirect()->route('admin.products.index')
+        return redirect()->route('admin.products.show', compact('product'))
             ->with('success', 'Product created successfully.');
     }
 
@@ -105,11 +106,21 @@ class ProductController extends Controller
             'name'          => ['required', 'string', 'max:255'],
             'description'   => ['required', 'string', 'max:65535'],
             'price'         => ['required', 'integer', 'min:0'],
+            'image'         => ['nullable', 'image', 'mimes:jpeg,png,bmp'],
         ]);
+        $file = $request->file('image');
 
-        $product->update($request->all());
+        // DB更新
+        $product->fill($request->all());
+        if ($file) {
+            $product->image_extension = $file->getClientOriginalExtension();
+        }
+        $product->save();
 
-        return redirect()->route('admin.products.index')
+        // 画像保存
+        $product->storeImage($file);
+
+        return redirect()->route('admin.products.edit', compact('product'))
             ->with('success', 'Product updated successfully.');
     }
 

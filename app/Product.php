@@ -43,6 +43,9 @@ class Product extends Model
      */
     public function storeImage($file)
     {
+        if (!$file) {
+            return false;
+        }
         return static::imageStorage()->putFileAs(static::IMAGE_DIRECTORY, $file, $this->imageFileName());
     }
 

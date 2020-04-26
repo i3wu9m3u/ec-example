@@ -12,6 +12,12 @@
         </div>
     </div>
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -23,7 +29,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.products.update',$product->id) }}" method="POST">
+    <form action="{{ route('admin.products.update',$product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -44,6 +50,12 @@
                 <div class="form-group">
                     <strong>Price:</strong>
                     <input type="number" name="price" class="form-control" placeholder="Price" value="{{ old('price') ?? $product->price }}" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Image:</strong>
+                    <img-upload name="image" src="{{ $product->imageUrl() }}">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
