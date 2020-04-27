@@ -14,35 +14,35 @@ class ProductsTableSeeder extends Seeder
         $products = [
             [
                 'name'      => 'Dog 11',
-                'description' => 'かわいい犬の画像集です。',
+                'description' => 'かわいい犬の写真集です。',
                 'price'     => 1100,
                 'image_extension'   => 'png',
             ],
             [
                 'name'      => 'Cat 22',
-                'description' => 'かわいい猫の画像集です。',
+                'description' => 'かわいい猫の写真集です。',
                 'price'     => 2200,
                 'image_extension'   => 'png',
             ],
             [
                 'name'      => "'SpecialDummy'",
                 'description' => 'specialダミー',
-                'price'     => 330,
-                'image_extension'   => 'jpg',
+                'price'     => 3300,
+                'image_extension'   => 'png',
             ],
         ];
 
-        foreach (range(1, 10) as $i) {
+        foreach (range(1, 7) as $i) {
             $products[] = [
                 'name'      => "Dummy $i",
                 'description' => "ダミー$i",
-                'price'     => 110,
-                'image_extension'   => 'jpg',
+                'price'     => 110 * $i,
+                'image_extension'   => 'png',
             ];
         }
 
-        foreach ($products as $p) {
-            \App\Product::create($p);
+        foreach ($products as $i => $p) {
+            $m = \App\Product::create($p);
         }
     }
 }
