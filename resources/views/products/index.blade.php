@@ -16,21 +16,25 @@
         </div>
     </div>
 
-    <div class="row">
-        <table class="table table-bordered col-md-12">
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <!-- th width="280px">Action</th -->
-            </tr>
-            @foreach ($products as $product)
-            <tr>
-                <td><a href="{{ route('products.show', $product->id) }}">{{ Str::limit($product->name, 40, '...') }}</a></td>
-                <td>{{ $product->price }}</td>
-            </tr>
-            @endforeach
-        </table>
+    @foreach ($products as $product)
+    <div class="card m-2" style="max-width: 540px">
+        <div class="row no-gutters">
+            <div class="col-sm-4">
+                <a href="{{ route('products.show', $product->id) }}">
+                    <img class="card-img-top" src="{{ $product->imageUrl() }}" alt="Product image">
+                </a>
+            </div>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{ route('products.show', $product->id) }}">{{ Str::limit($product->name, 20, '...') }}</a></h5>
+                    <p class="card-text">&yen;{{ $product->price }}</p>
+                    <p class="card-text"><small class="text-muted">{{ Str::limit($product->description, 40, '...') }}</small></p>
+                    <p class="card-text"><a href="javascript:alert('カートは未実装です');" class="btn btn-primary">カートに入れる</a></p>
+                </div>
+            </div>
+        </div>
     </div>
+    @endforeach
 
     {!! $products->appends(Request::except('page'))->links() !!}
 

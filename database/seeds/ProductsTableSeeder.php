@@ -26,16 +26,16 @@ class ProductsTableSeeder extends Seeder
             ],
             [
                 'name'      => "'SpecialDummy'",
-                'description' => 'specialダミー',
+                'description' => "'special'なダミー説明文です。'special'なダミー説明文です。'special'なダミー説明文です。",
                 'price'     => 3300,
                 'image_extension'   => 'png',
             ],
         ];
 
-        foreach (range(1, 7) as $i) {
+        foreach (range(1, 20) as $i) {
             $products[] = [
                 'name'      => "Dummy $i",
-                'description' => "ダミー$i",
+                'description' => "ダミー説明文その{$i}です。",
                 'price'     => 110 * $i,
                 'image_extension'   => 'png',
             ];
