@@ -22,22 +22,6 @@ class Product extends Model
     public const IMAGE_DIRECTORY = 'products/images';
 
     /**
-     * @return string
-     */
-    public function imageFileName(): string
-    {
-        return sprintf("%d.%s", $this->id, $this->image_extension);
-    }
-
-    /**
-     * @return string
-     */
-    public function imagePath(): string
-    {
-        return static::IMAGE_DIRECTORY . DIRECTORY_SEPARATOR . $this->imageFileName();
-    }
-
-    /**
      * @param  \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string  $file
      * @return string|false
      */
@@ -68,10 +52,49 @@ class Product extends Model
     }
 
     /**
+     * @return string
+     */
+    protected function imageFileName(): string
+    {
+        return sprintf("%d.%s", $this->id, $this->image_extension);
+    }
+
+    /**
+     * @return string
+     */
+    protected function imagePath(): string
+    {
+        return static::IMAGE_DIRECTORY . DIRECTORY_SEPARATOR . $this->imageFileName();
+    }
+
+    /**
      *
      */
     protected static function imageStorage()
     {
         return Storage::disk('public');
+    }
+
+    protected static function queryBase($query = null)
+    {
+        if (!$query) {
+            $query = static::query();
+        }
+        return $query;
+    }
+
+    public static function fuzzySearch(string $keyword, $query = null)
+    {
+        return static::queryBase($query)
+            ->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%");
+            });
+    }
+
+    public static function priceFilter(int $price, $query = null)
+    {
+        return static::queryBase($query)
+            ->where('price', '<=', $price);
     }
 }

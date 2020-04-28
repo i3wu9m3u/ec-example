@@ -13,9 +13,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <b-alert variant="success" show="">
-                        You are logged in!
-                    </b-alert>
+                    <p class="card-text">
+                        <a class="card-link" href="{{ route('users.index') }}">Account</a>
+                    </p>
+                    <p class="card-text">
+                        <a class="card-link" href="{{ route('products.index') }}">View Products</a>
+                    </p>
                 </div>
             </div>
         </div>
