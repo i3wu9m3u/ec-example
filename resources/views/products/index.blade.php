@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <div class="row">
         <div class="col-md-2">
             <div class="pull-left">
@@ -17,14 +18,14 @@
     </div>
 
     @foreach ($products as $product)
-    <div class="card m-2" style="max-width: 540px">
+    <div class="card m-2" style="width: 90%">
         <div class="row no-gutters">
-            <div class="col-sm-4">
+            <div class="col-md-3">
                 <a href="{{ route('products.show', $product->id) }}">
                     <img class="card-img-top" src="{{ $product->imageUrl() }}" alt="Product image">
                 </a>
             </div>
-            <div class="col-sm-8">
+            <div class="col-md-4">
                 <div class="card-body">
                     <h5 class="card-title"><a href="{{ route('products.show', $product->id) }}">{{ Str::limit($product->name, 20, '...') }}</a></h5>
                     <p class="card-text">&yen;{{ $product->price }}</p>
@@ -37,5 +38,5 @@
     @endforeach
 
     {!! $products->appends(Request::except('page'))->links() !!}
-
+</div>
 @endsection

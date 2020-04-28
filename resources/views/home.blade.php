@@ -13,8 +13,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a class="card-link" href="{{ route('users.index') }}">Account</a>
-                    <a class="card-link" href="{{ route('products.index') }}">View Products</a>
+                    <p class="card-text">
+                        <a class="card-link" href="{{ route('users.index') }}">Account</a>
+                    </p>
+                    <p class="card-text">
+                        <a class="card-link" href="{{ route('products.index') }}">View Products</a>
+                    </p>
                 </div>
             </div>
         </div>
