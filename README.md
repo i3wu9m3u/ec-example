@@ -10,6 +10,13 @@ cd project_dir/
 # change permissions
 chmod -R 777 ./storage ./bootstrap/cache
 
+# mysql setting
+# ...
+
+# env
+cp -iv .env.example .env
+vim .env
+
 # composer
 composer install
 
@@ -17,9 +24,7 @@ composer install
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y nodejs
 
-# env
-cp -iv .env.example .env
-vim .env
+# app
 php artisan key:generate
 
 # DB
